@@ -2,103 +2,184 @@
 <html lang="en">
 
   <head>
-    <title>Live Reviews</title>
+    <title>Simple Review System</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index,follow">
     <meta name="generator" content="GrapesJS Studio">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Source+Sans+3:wght@400;600&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="rev.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet" />
   </head>
 
   <body class="gjs-t-body">
-    <header class="page-header" id="izjmz">
-      <div class="header-container" id="icjpe">
-        <h1 class="gjs-t-h1 header-title" id="i5fyg">Live Reviews</h1>
-        <p class="header-subtitle" id="i9g4i">See new reviews as they come in and add your own in seconds.</p>
-      </div>
-    </header>
-    <main class="main-content" id="ivoyl">
-      <section class="live-reviews-section" id="ii5r6">
-        <div class="gjs-t-border live-reviews-card" id="itksz">
-          <div class="live-reviews-header" id="ijawk">
-            <h2 class="gjs-t-h2 live-reviews-title" id="iy69h">Latest Reviews</h2>
-            <small class="live-reviews-hint" id="iatq1">Updates instantly</small>
+    <main class="main-content" id="i654s">
+      <section class="review-system-section" id="idyuj">
+        <header class="section-header" id="innei">
+          <h1 class="gjs-t-h1 page-title" id="igu4f">Simple Review System</h1>
+          <p class="page-subtitle" id="i998f">Submit a 1–5 star rating. See the live average and the last 3 reviews.</p>
+        </header>
+        <article class="gjs-t-border average-card" id="ia6dj">
+          <div class="average-header-row" id="ir5xw">
+            <h2 class="gjs-t-h2 average-title" id="ibkbc">Average rating</h2>
+            <div class="average-metrics-group" id="ir9tr">
+              <div id="avgNumber" aria-live="polite" class="average-value">0.0</div>
+              <small id="reviewsCount" class="total-reviews-label">0 reviews</small>
+            </div>
           </div>
-          <ul id="reviewsList" aria-live="polite" role="list" class="live-reviews-list">
-            <li role="listitem" class="gjs-t-border review-item" id="i1efj">
-              <span class="review-text" id="ifmbf">Excellent</span>
-              <span class="review-meta" id="ir6dg">Just now</span>
-            </li>
-            <li role="listitem" class="gjs-t-border review-item" id="ib9vc">
-              <span class="review-text" id="i9vfh">Good</span>
-              <span class="review-meta" id="iuyfg">1 min ago</span>
-            </li>
-            <li role="listitem" class="gjs-t-border review-item" id="ibf26">
-              <span class="review-text" id="ilimh">Average</span>
-              <span class="review-meta" id="ifvzy">2 mins ago</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section class="submit-review-section" id="itqph">
-        <div class="gjs-t-border submit-review-card" id="i2r2x">
-          <h2 class="gjs-t-h2 submit-review-title" id="iawtl">Submit a Review</h2>
-          <form method="get" id="reviewForm" aria-label="Submit a review" class="submit-review-form">
-            <label for="reviewSelect" class="review-label" id="inq1k">Choose a review</label>
-            <select type="text" id="reviewSelect" required class="gjs-t-border review-select">
-              <option value="" selected disabled id="inxzk">Choose your review</option>
-              <option value="Excellent" id="i0qz9">Excellent</option>
-              <option value="Good" id="in4hz">Good</option>
-              <option value="Average" id="ihw8i">Average</option>
-              <option value="Poor" id="ijqwh">Poor</option>
-            </select>
-            <button type="submit" class="gjs-t-button submit-button" id="ipd6w">Submit</button>
+          <div class="average-stars-row" id="i4481">
+            <div id="avgStars" aria-label="Average star rating visualization" class="average-stars-visual"></div>
+            <span class="average-badge" id="ivqll">Live</span>
+          </div>
+        </article>
+        <article class="gjs-t-border submit-review-card" id="inqfr">
+          <h2 class="gjs-t-h2 submit-review-title" id="iw3ts">Leave a rating</h2>
+          <form method="get" id="reviewForm" class="review-form">
+            <div class="rating-field-group" id="ieugj">
+              <label for="ratingSelect" class="rating-label" id="ijoew">Your rating</label>
+              <select type="text" id="ratingSelect" name="rating" required class="gjs-t-border rating-select">
+                <option value="5" selected id="iqyi7">★★★★★ (5 - Excellent)</option>
+                <option value="4" id="iltyl">★★★★☆ (4 - Good)</option>
+                <option value="3" id="in6g4">★★★☆☆ (3 - Average)</option>
+                <option value="2" id="isrga">★★☆☆☆ (2 - Poor)</option>
+                <option value="1" id="izc2k">★☆☆☆☆ (1 - Very Poor)</option>
+              </select>
+            </div>
+            <button type="submit" class="gjs-t-button submit-button" id="i43ax">Submit</button>
           </form>
-          <p class="submit-helper-text" id="iuocz">Pick a rating and hit Submit to add it to the live list.</p>
-        </div>
+        </article>
+        <article class="gjs-t-border recent-reviews-card" id="iz306">
+          <div class="recent-reviews-header" id="i1p2i">
+            <h2 class="gjs-t-h2 recent-reviews-title" id="i57uf">Recent reviews</h2>
+            <span class="recent-reviews-subtext" id="ivcn3">Last 3 submissions</span>
+          </div>
+          <ul id="reviewsList" class="reviews-list">
+            <li class="empty-reviews-message" id="iqnic">No reviews yet. Be the first to leave a rating.</li>
+          </ul>
+        </article>
       </section>
     </main>
-    <footer class="page-footer" id="inaje">
-      <div class="footer-container" id="iykp9">
-        <p class="footer-text" id="iicur">Simple live reviews demo.</p>
-      </div>
-    </footer>
-    <script id="ilenf">
+    <script type="application/javascript" id="i4kdf">
       (function() {
-        const form = document.getElementById('reviewForm');
-        const select = document.getElementById('reviewSelect');
-        const list = document.getElementById('reviewsList');
+        const STORAGE_KEY = 'simple-review-ratings-v1';
 
-        function timeLabel() {
-          return 'Just now';
+        const $ = (sel) => document.querySelector(sel);
+        const avgNumberEl = $('#avgNumber');
+        const avgStarsEl = $('#avgStars');
+        const reviewsCountEl = $('#reviewsCount');
+        const reviewsListEl = $('#reviewsList');
+        const formEl = $('#reviewForm');
+        const selectEl = $('#ratingSelect');
+
+        function loadReviews() {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            const parsed = raw ? JSON.parse(raw) : [];
+            // Normalize to objects { rating, at }
+            return Array.isArray(parsed) ?
+              parsed.map((item) => {
+                if (typeof item === 'number') return {
+                  rating: item,
+                  at: Date.now()
+                };
+                const r = typeof item?.rating === 'number' ? item.rating : Number(item?.rating);
+                const at = typeof item?.at === 'number' ? item.at : Date.now();
+                return {
+                  rating: Math.max(1, Math.min(5, r || 0)),
+                  at
+                };
+              }) :
+              [];
+          } catch {
+            return [];
+          }
         }
 
-        form.addEventListener('submit', function(e) {
+        function saveReviews(list) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        }
+
+        function average(list) {
+          if (!list.length) return 0;
+          const sum = list.reduce((acc, cur) => acc + (cur.rating || 0), 0);
+          return sum / list.length;
+        }
+
+        function starsHTML(rating, size = 20, dataName = 'Star Rating Visual') {
+          const full = Math.max(0, Math.min(5, Math.round(rating)));
+          const filledColor = '%23F59E0B'; // var(--gjs-t-color-warning)
+          const emptyColor = '%23CBD5E1'; // slate-300
+          let imgs = '';
+          for (let i = 1; i <= 5; i++) {
+            const color = i <= full ? filledColor : emptyColor;
+            imgs += `
+              <img data-gjs-name="Star Icon"
+                   src="https://api.iconify.design/lucide-star.svg?color=${color}"
+                   width="${size}" height="${size}"
+                   alt="" aria-hidden="true" loading="lazy"
+                   class="shrink-0">`;
+          }
+          return `<div class="flex items-center gap-1" data-gjs-name="${dataName}">${imgs}<span class="sr-only" data-gjs-name="Star Rating SR Text">${full} out of 5 stars</span></div>`;
+        }
+
+        function formatCount(n) {
+          return n === 1 ? '1 review' : `${n} reviews`;
+        }
+
+        function updateAverageUI(list) {
+          const avg = average(list);
+          avgNumberEl.textContent = avg.toFixed(1);
+          reviewsCountEl.textContent = formatCount(list.length);
+          avgStarsEl.innerHTML = starsHTML(Math.round(avg), 20, 'Average Stars Visual Live');
+        }
+
+        function renderRecent(list) {
+          const recent = [...list].sort((a, b) => b.at - a.at).slice(0, 3);
+          if (!recent.length) {
+            reviewsListEl.innerHTML = `<li class="opacity-60" data-gjs-name="Empty Reviews Message">No reviews yet. Be the first to leave a rating.</li>`;
+            return;
+          }
+          const items = recent.map((item) => {
+            const date = new Date(item.at);
+            const when =
+              isNaN(date.getTime()) ?
+              '' :
+              date.toLocaleString(undefined, {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+              });
+            return `
+              <li class="flex items-center justify-between gap-4 border-b last:border-b-0 pb-3" data-gjs-name="Review Item">
+                <div class="flex items-center gap-3" data-gjs-name="Review Left Group">
+                  ${starsHTML(item.rating, 18, 'Review Stars Visual')}
+                  <span class="text-sm opacity-70" data-gjs-name="Review Numeric Label">${item.rating} / 5</span>
+                </div>
+                <small class="text-xs opacity-60" data-gjs-name="Review Timestamp">${when}</small>
+              </li>`;
+          });
+          reviewsListEl.innerHTML = items.join('');
+        }
+
+        // Initialize
+        let reviews = loadReviews();
+        updateAverageUI(reviews);
+        renderRecent(reviews);
+
+        // Handle submit
+        formEl.addEventListener('submit', (e) => {
           e.preventDefault();
-          const value = select.value;
-          if (!value) return;
-
-          const li = document.createElement('li');
-          li.setAttribute('data-gjs-name', 'Review Item');
-          li.setAttribute('role', 'listitem');
-          li.className = 'border gjs-t-border p-3';
-
-          const text = document.createElement('span');
-          text.setAttribute('data-gjs-name', 'Review Text');
-          text.className = 'block';
-          text.textContent = value;
-
-          const meta = document.createElement('span');
-          meta.setAttribute('data-gjs-name', 'Review Meta');
-          meta.className = 'block text-[13px] text-[color:var(--gjs-t-color-secondary)]';
-          meta.textContent = timeLabel();
-
-          li.appendChild(text);
-          li.appendChild(meta);
-
-          list.prepend(li);
-          select.value = '';
-          select.blur();
+          const value = Number(selectEl.value);
+          if (!value || value < 1 || value > 5) return;
+          const entry = {
+            rating: value,
+            at: Date.now()
+          };
+          reviews = [entry, ...reviews]; // unshift newest
+          saveReviews(reviews);
+          updateAverageUI(reviews);
+          renderRecent(reviews);
         });
       })();
     </script>
