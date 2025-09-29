@@ -1,104 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Star Rating System</title>
-    <!-- Load Tailwind CSS from CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom CSS to ensure the star character renders clearly */
-        .star-rating {
-            font-size: 2.5rem; /* Larger stars for better touch/click targets */
-            line-height: 1;
-            display: inline-block;
-            transition: color 0.2s ease;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-sans">
 
-    <div id="review-container" class="p-8 bg-white rounded-xl shadow-2xl transition duration-300">
-        <!-- The star rating elements -->
-        <div class="flex justify-center" id="star-widget">
-            <span class="star-rating text-gray-300 hover:text-yellow-400 cursor-pointer" data-value="1" aria-label="1 star rating">★</span>
-            <span class="star-rating text-gray-300 hover:text-yellow-400 cursor-pointer" data-value="2" aria-label="2 star rating">★</span>
-            <span class="star-rating text-gray-300 hover:text-yellow-400 cursor-pointer" data-value="3" aria-label="3 star rating">★</span>
-            <span class="star-rating text-gray-300 hover:text-yellow-400 cursor-pointer" data-value="4" aria-label="4 star rating">★</span>
-            <span class="star-rating text-gray-300 hover:text-yellow-400 cursor-pointer" data-value="5" aria-label="5 star rating">★</span>
+  <head>
+    <title>Live Reviews</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow">
+    <meta name="generator" content="GrapesJS Studio">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Source+Sans+3:wght@400;600&amp;display=swap" rel="stylesheet" />
+  </head>
+
+  <body class="gjs-t-body">
+    <header class="page-header" id="izjmz">
+      <div class="header-container" id="icjpe">
+        <h1 class="gjs-t-h1 header-title" id="i5fyg">Live Reviews</h1>
+        <p class="header-subtitle" id="i9g4i">See new reviews as they come in and add your own in seconds.</p>
+      </div>
+    </header>
+    <main class="main-content" id="ivoyl">
+      <section class="live-reviews-section" id="ii5r6">
+        <div class="gjs-t-border live-reviews-card" id="itksz">
+          <div class="live-reviews-header" id="ijawk">
+            <h2 class="gjs-t-h2 live-reviews-title" id="iy69h">Latest Reviews</h2>
+            <small class="live-reviews-hint" id="iatq1">Updates instantly</small>
+          </div>
+          <ul id="reviewsList" aria-live="polite" role="list" class="live-reviews-list">
+            <li role="listitem" class="gjs-t-border review-item" id="i1efj">
+              <span class="review-text" id="ifmbf">Excellent</span>
+              <span class="review-meta" id="ir6dg">Just now</span>
+            </li>
+            <li role="listitem" class="gjs-t-border review-item" id="ib9vc">
+              <span class="review-text" id="i9vfh">Good</span>
+              <span class="review-meta" id="iuyfg">1 min ago</span>
+            </li>
+            <li role="listitem" class="gjs-t-border review-item" id="ibf26">
+              <span class="review-text" id="ilimh">Average</span>
+              <span class="review-meta" id="ifvzy">2 mins ago</span>
+            </li>
+          </ul>
         </div>
-    </div>
+      </section>
+      <section class="submit-review-section" id="itqph">
+        <div class="gjs-t-border submit-review-card" id="i2r2x">
+          <h2 class="gjs-t-h2 submit-review-title" id="iawtl">Submit a Review</h2>
+          <form method="get" id="reviewForm" aria-label="Submit a review" class="submit-review-form">
+            <label for="reviewSelect" class="review-label" id="inq1k">Choose a review</label>
+            <select type="text" id="reviewSelect" required class="gjs-t-border review-select">
+              <option value="" selected disabled id="inxzk">Choose your review</option>
+              <option value="Excellent" id="i0qz9">Excellent</option>
+              <option value="Good" id="in4hz">Good</option>
+              <option value="Average" id="ihw8i">Average</option>
+              <option value="Poor" id="ijqwh">Poor</option>
+            </select>
+            <button type="submit" class="gjs-t-button submit-button" id="ipd6w">Submit</button>
+          </form>
+          <p class="submit-helper-text" id="iuocz">Pick a rating and hit Submit to add it to the live list.</p>
+        </div>
+      </section>
+    </main>
+    <footer class="page-footer" id="inaje">
+      <div class="footer-container" id="iykp9">
+        <p class="footer-text" id="iicur">Simple live reviews demo.</p>
+      </div>
+    </footer>
+    <script id="ilenf">
+      (function() {
+        const form = document.getElementById('reviewForm');
+        const select = document.getElementById('reviewSelect');
+        const list = document.getElementById('reviewsList');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const starWidget = document.getElementById('star-widget');
-            const stars = starWidget.querySelectorAll('.star-rating');
+        function timeLabel() {
+          return 'Just now';
+        }
 
-            // This variable holds the rating that the user has permanently clicked.
-            let currentRating = 0;
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const value = select.value;
+          if (!value) return;
 
-            // --- Helper Functions ---
+          const li = document.createElement('li');
+          li.setAttribute('data-gjs-name', 'Review Item');
+          li.setAttribute('role', 'listitem');
+          li.className = 'border gjs-t-border p-3';
 
-            /**
-             * Updates the visual display of the stars based on a given rating value.
-             * @param {number} rating The value (1-5) to light up stars to.
-             * @param {string} colorClass The Tailwind class for the filled star color.
-             */
-            const renderStars = (rating, colorClass) => {
-                stars.forEach((star, index) => {
-                    // Check if the current star index (0-4) is less than the rating value (1-5)
-                    if (index < rating) {
-                        star.classList.remove('text-gray-300');
-                        star.classList.add(colorClass);
-                    } else {
-                        star.classList.remove(colorClass);
-                        star.classList.add('text-gray-300');
-                    }
-                });
-            };
+          const text = document.createElement('span');
+          text.setAttribute('data-gjs-name', 'Review Text');
+          text.className = 'block';
+          text.textContent = value;
 
-            // --- Event Handlers ---
+          const meta = document.createElement('span');
+          meta.setAttribute('data-gjs-name', 'Review Meta');
+          meta.className = 'block text-[13px] text-[color:var(--gjs-t-color-secondary)]';
+          meta.textContent = timeLabel();
 
-            // 1. Click Listener: Sets the permanent rating
-            starWidget.addEventListener('click', (event) => {
-                const star = event.target.closest('.star-rating');
-                if (star) {
-                    const ratingValue = parseInt(star.getAttribute('data-value'));
-                    currentRating = ratingValue;
-                    
-                    // Render the permanent selection in a distinct yellow color
-                    renderStars(currentRating, 'text-yellow-500');
-                    
-                    // OPTIONAL: Console log the saved rating
-                    console.log(`Rating saved: ${currentRating} stars.`);
-                }
-            });
+          li.appendChild(text);
+          li.appendChild(meta);
 
-            // 2. Mouseover Listener: Shows temporary hover effect
-            starWidget.addEventListener('mouseover', (event) => {
-                const star = event.target.closest('.star-rating');
-                if (star) {
-                    const hoverValue = parseInt(star.getAttribute('data-value'));
-                    
-                    // Render the hover selection in a slightly lighter yellow
-                    renderStars(hoverValue, 'text-yellow-400');
-                }
-            });
-
-            // 3. Mouseout Listener: Reverts to the last clicked rating
-            starWidget.addEventListener('mouseout', () => {
-                // If there is a current rating, display it permanently (yellow-500).
-                if (currentRating > 0) {
-                    renderStars(currentRating, 'text-yellow-500');
-                } else {
-                    // If no rating is selected, revert all stars back to gray.
-                    renderStars(0, 'text-yellow-400');
-                }
-            });
-
-            // Initial state check (in case we wanted to load a previous rating)
-            renderStars(currentRating, 'text-yellow-500');
+          list.prepend(li);
+          select.value = '';
+          select.blur();
         });
+      })();
     </script>
-</body>
+  </body>
+
 </html>
